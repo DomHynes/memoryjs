@@ -6,18 +6,12 @@
  */
 
 /* eslint-disable no-console */
-const { spawn } = require('child_process');
+const { execSync } = require('child_process');
 
 function run(script) {
   console.log(`Node architecture is ${process.arch}: running "${script}"`);
 
-  const program = script.split(' ')[0];
-  const args = script.split(' ').slice(1);
-
-  // inherit stdio to print colour (helpful for warnings/errors readability)
-  const child = spawn(program, args, { stdio: 'inherit' });
-
-  child.on('close', code => console.log(`Script "${script}" exited with ${code}`));
+  execSync(script)
 }
 
 const buildScripts = {
